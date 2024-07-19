@@ -1,8 +1,13 @@
-# React + Vite
+# Readme
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Updates and Changes
 
-Currently, two official plugins are available:
+- [x] make the basic page layout: header, chat window, footer with text input and submit button
+- [x] enable message submit on Enter key
+- [x] scroll to the bottom of the chat window when a new chat comes in
+- [o] add username to chat messages
+- [ ] take in chat messages as objects instead of plain strings to then be able to add more properties like username, timestamp, etc. with unique formatting
+- [ ] add a unique color to each user's username
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Ideas
+- [ ] add a timestamp to each chat
