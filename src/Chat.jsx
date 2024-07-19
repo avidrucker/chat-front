@@ -32,7 +32,7 @@ const Chat = () => {
   return (
     <main className="h-100 flex flex-column">
       <h1 className="ma0 ph3 pv2 bb b--white">Awesome Chat</h1>
-      <div className="overflow-y-scroll ph3 pv2">
+      <div className="overflow-y-scroll h-100 ph3 pv2">
         {messages.map((msg, index) => (
           <div key={index}>{msg}</div>
         ))}
