@@ -1,19 +1,26 @@
 import { useState, useEffect, useRef } from 'react';
 import io from 'socket.io-client';
 
-// const socket = io('http://localhost:3000');
-const socket = io('http://www.adrucker.com:3000');
+const BASE_URL = import.meta.env.VITE_API_URL;
+
+const socket = io(`${BASE_URL}:3000`);
 
 const Chat = () => {
   const [message, setMessage] = useState('');
   const [messages, setMessages] = useState([]);
+  const [username, setUsername] = useState("");
   const messagesEndRef = useRef(null);
+
 
   useEffect(() => {
     socket.on('chat message', (username, msg) => {
-      msg = `${username}: ${msg}`;
-      setMessages((prevMessages) => [...prevMessages, msg]);
+      console.log(socket);
+      setMessages((prevMessages) => [...prevMessages, {username, msg}]);
     });
+
+    socket.on('username', (username) => {
+      setUsername(username);
+    })
 
     return () => {
       socket.off('chat message');
@@ -31,10 +38,14 @@ const Chat = () => {
 
   return (
     <main className="h-100 flex flex-column">
-      <h1 className="ma0 ph3 pv2 bb b--white">Awesome Chat</h1>
-      <div className="overflow-y-scroll h-100 ph3 pv2">
+      <header className="flex items-center ph3 pv2 bb b--white">
+        <h1 className="ma0 dib f1 mr3">Awesome Chat</h1>
+        <h2 className="ma0 dib f1 blue">{username}</h2>
+      </header>
+      <div className="overflow-y-scroll h-100 ph3 pv2 ">
         {messages.map((msg, index) => (
-          <div key={index}>{msg}</div>
+          
+          <div key={index}><strong className={msg.username === username ? `blue` : `red`}>{`${msg.username}`}</strong>: {`${msg.msg}`}</div>
         ))}
         <div ref={messagesEndRef} /> {/* Invisible element at the end of messages */}
       </div>
